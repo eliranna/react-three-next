@@ -1,12 +1,34 @@
 'use client'
 
 import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
+export function Dog(props) {
+
+  const { scene, animations } = useLoader(GLTFLoader, props.src);
+  let mixer;
+
+  useEffect(() => {
+    mixer = new THREE.AnimationMixer(scene);
+    if (props.state) {
+      void mixer.clipAction(animations[props.state]).play();
+    }
+  }, props.state)
+
+  useFrame((state, delta) => {
+    mixer.update(delta);
+  });
+
+  return <primitive object={scene} {...props} />
+}
+
+
+/*
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
   const [hovered, hover] = useState(false)
@@ -40,11 +62,8 @@ export const Logo = ({ route = '/blob', ...props }) => {
 
   return (
     <group ref={mesh} {...props}>
-      {/* @ts-ignore */}
       <Line worldUnits points={points} color='#1fb2f5' lineWidth={0.15} />
-      {/* @ts-ignore */}
       <Line worldUnits points={points} color='#1fb2f5' lineWidth={0.15} rotation={[0, 0, 1]} />
-      {/* @ts-ignore */}
       <Line worldUnits points={points} color='#1fb2f5' lineWidth={0.15} rotation={[0, 0, -1]} />
       <mesh onClick={() => router.push(route)} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)}>
         <sphereGeometry args={[0.55, 64, 64]} />
@@ -61,8 +80,5 @@ export function Duck(props) {
 
   return <primitive object={scene} {...props} />
 }
-export function Dog(props) {
-  const { scene } = useGLTF('/dog.glb')
 
-  return <primitive object={scene} {...props} />
-}
+*/

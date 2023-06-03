@@ -30,7 +30,7 @@ export default function Page() {
       <div className='relative h-full w-full'>
         <View orbit className='relative h-full'>
           <Suspense fallback={null}>
-            <Dog scale={2} position={[0, 0, 0]} rotation={[0.0, -0.3, 0]} src={'/cute_dragon.glb'} state={action} />
+            <Dog scale={3} position={[-1, 0, 0]} rotation={[0.0, 0, 0]} src={'/cute_dragon.glb'} state={action} />
             <Common color={'#121212'} />
           </Suspense>
         </View>

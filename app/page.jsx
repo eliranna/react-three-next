@@ -24,7 +24,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
-  const [action, setAction] = useState(null)
+  const [action, setAction] = useState("0")
   return (
     <>
       <div className='relative h-full w-full'>

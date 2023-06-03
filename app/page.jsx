@@ -28,11 +28,10 @@ export default function Page() {
   return (
     <>
       <div className='relative h-full w-full'>
-        <button onClick={() => setAction("0")}>dance </button>
         <View orbit className='relative h-full'>
           <Suspense fallback={null}>
             <Dog scale={2} position={[0, 0, 0]} rotation={[0.0, -0.3, 0]} src={'/cute_dragon.glb'} state={action} />
-            <Common color={'lightpink'} />
+            <Common color={'#121212'} />
           </Suspense>
         </View>
       </div>

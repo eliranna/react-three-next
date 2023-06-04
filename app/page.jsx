@@ -25,6 +25,16 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page() {
   const [action, setAction] = useState("0")
+  fetch('https://flask-hello-world-2-one.vercel.app/api/about', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(res => {
+    return res.json()
+  }).then(res => {
+    console.log(res)
+  })
   return (
     <>
       <div className='relative h-full w-full'>
